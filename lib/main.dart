@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsapp/screens/four.dart';
 import 'package:newsapp/screens/one.dart';
 import 'package:newsapp/screens/three.dart';
+
+import 'newscubit/getnews/getnews_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +15,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<GetnewsCubit>(
+          create: (BuildContext context) => GetnewsCubit(),
+        ),
+      ],
+      child: MaterialApp(
+        home: const One(),
       ),
-      home: const Four(),
     );
   }
 }
